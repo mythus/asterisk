@@ -4,14 +4,17 @@ import os
 import sys
 import subprocess
 import pynagios
-
+        
 def ast_peer_status():
-    '''Get current active sip peers accoring to asterisk'''
-    astCmd=['asterisk' , '-rx' , 'sip show peers']
-    try:
-        astPipe = subprocess.Popen(astCmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-       # astStdout , astSdterr = astPipe.communicate()
-        print len(astPipe.communicate())
+                
+        '''Get current active sip peers accoring to asterisk'''
+        astCmd=['asterisk' , '-rx' , 'sip show peers']
+        try:
+                astPipe = subprocess.Popen(     astCmd, 
+                                                stdout=subprocess.PIPE,
+                                                stderr=subprocess.PIPE  )
+                # astStdout , astSdterr = astPipe.communicate()
+                
         if astStderr :
 
             print astStderr , "LALALAL"
