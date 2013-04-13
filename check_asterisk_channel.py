@@ -28,6 +28,7 @@ def ast_cmd_exec(astCmd):
 def ast_sip_status(name):
 
         '''Check sip peer status and return rtt to the peer'''
+
         astCmd = ['asterisk' , '-rx' , 'sip show peer %s' % name]
         astOut = ast_cmd_exec(astCmd)
         if re.search(r'Peer .* not found', astOut):
@@ -47,8 +48,10 @@ def ast_sip_status(name):
 def ast_iax2_status(name):
 
         '''Check iax2 peer status and return rtt to the peer. For now it's like the sip check'''
+
         astCmd = ['asterisk' , '-rx' , 'iax2 show peer %s' %name]
         astOut = ast_cmd_exec(astCmd)
+
         if re.search(r'Peer .* not found', astOut):
                 pynagios.Response(pynagios.CRITICAL, "Check failed: %s" % astPut).exit()
                 
@@ -63,11 +66,14 @@ def ast_iax2_status(name):
         return status, qos
         
 def ast_dahdi_status(description):
+
         '''Search dahdi car status by a description'''
+
         astCmd = ['asterisk' , '-rx' , 'dahdi show status']
         astOut =  ast_cmd_exec(astCmd)
         regexp = re.compile( re.escape(description) + r'.*\s+([A-Z]+)\s+\d+\s+\d+\s+(\d+)')
         status = None
+
         for card in astOut.split('\n'):
                 if regexp.search(card):
                         status, crc4 = regexp.search(card).group(1,2)
