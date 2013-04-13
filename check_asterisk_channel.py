@@ -53,7 +53,7 @@ def ast_iax2_status(name):
         astOut = ast_cmd_exec(astCmd)
 
         if re.search(r'Peer .* not found', astOut):
-                pynagios.Response(pynagios.CRITICAL, "Check failed: %s" % astPut).exit()
+                pynagios.Response(pynagios.CRITICAL, "Check failed: %s" % astOut).exit()
                 
         status = re.search(r'\s*Status\s*:.*', astOut).group().split(':')[1]
         
